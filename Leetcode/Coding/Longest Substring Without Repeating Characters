@@ -1,0 +1,26 @@
+def removeUntilEnd(s,start,end,mem):
+    while start<end:
+        if s[end] in mem:
+            mem.remove(s[start])
+            start+=1
+        else:
+            break
+    return start,end,mem
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if(len(s) == 0 ): return 0
+        start = 0
+        end = start + 1
+        mem = set(s[start])
+        largest = 1            
+        while end < len(s):
+            if ( s[end] in mem):
+                largest = max(len(mem),largest)
+                start,end,mem = removeUntilEnd(s,start,end,mem)
+            else: 
+                mem.add(s[end])
+                end += 1
+
+        largest = max(len(mem),largest)
+        return(largest)        
+                
