@@ -1,0 +1,24 @@
+class Solution:
+    def minOperations(self, nums: List[int]) -> int:
+        frequency = {}
+        for i in nums:
+            try:
+                frequency[i]+=1
+            except:
+                frequency[i]=1
+        steps = 0
+        for i in frequency:
+            count =  frequency[i]
+            if(count == 1):
+                steps = -1
+                break
+            quo = count//3
+            rem = count%3
+            if(rem != 0):
+                if( quo != 0 and rem == 1):
+                    quo-=1
+                    rem+=3
+                    
+            steps += quo + (rem//2)
+
+        return steps
